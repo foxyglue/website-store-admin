@@ -56,7 +56,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ //FC = Function Comp
             await axios.patch(`/api/stores/${params.storeId}`, data) //kirim data ke folder api/stores/[storeId]/route.ts (logic api ini ada disitu)
             router.refresh()
             toast.success("Berhasil mengupdate nama toko")
-        } catch (error) {
+        } catch {
             toast.error("Cek kembali data yang diinput")
         } finally {
             setLoading(false)
@@ -70,7 +70,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ //FC = Function Comp
             router.refresh()
             router.push("/") // setelah dihapus, redirect ke halaman utama; push untuk navigasi ke halaman lain
             toast.success("Berhasil menghapus toko")
-        } catch (error) {
+        } catch {
             toast.error("Gagal menghapus toko, cek kembali data dan koneksi anda")
 
         } finally {

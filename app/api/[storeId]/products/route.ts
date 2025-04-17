@@ -1,8 +1,6 @@
 import db from "@/lib/db";
-import { useAuth } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { Search } from 'lucide-react';
 
 export async function POST(req: Request, 
     {params}: {params: {storeId: string}} // params adalah parameter yang dikirimkan dari url; dapat dr nama folder [storeId]

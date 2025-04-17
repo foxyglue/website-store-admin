@@ -18,7 +18,7 @@ import * as z from "zod"
 import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import { AlertModal } from "@/components/modals/alert-modal"
-import { useOrigin } from "@/hooks/use-origin"
+// import { useOrigin } from "@/hooks/use-origin"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
@@ -41,7 +41,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ //FC = Function Comp
 
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin() // untuk mendapatkan origin dari url; misal: http://localhost:3000
+    // const origin = useOrigin() // untuk mendapatkan origin dari url; misal: http://localhost:3000
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false) // state untuk menyimpan data loading
@@ -75,7 +75,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ //FC = Function Comp
             router.refresh()
             router.push(`/${params.storeId}/categories`) // setelah diupdate, redirect ke halaman toko; 
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error("Cek kembali data yang diinput")
         } finally {
             setLoading(false)
@@ -89,7 +89,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ //FC = Function Comp
             router.refresh()
             router.push(`/${params.storeId}/categories`) // setelah dihapus, redirect ke halaman utama; push untuk navigasi ke halaman lain
             toast.success("Berhasil menghapus kategori")
-        } catch (error) {
+        } catch {
             toast.error("Gagal menghapus toko, cek kembali data dan koneksi anda")
 
         } finally {

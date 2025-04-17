@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
-import { Banner } from "@prisma/client"
 import { Plus } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
 import { BannerColumn, columns } from "./columns"

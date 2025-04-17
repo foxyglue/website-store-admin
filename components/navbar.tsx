@@ -1,6 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
 import { MainNav } from "./main-nav";
-import { Store } from "lucide-react";
 import StoreSwitcher from "./store-switcher";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";

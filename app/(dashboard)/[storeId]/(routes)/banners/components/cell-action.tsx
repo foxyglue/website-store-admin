@@ -36,7 +36,7 @@ export const CellAction: React.FC<CellActionProps>= ({
             router.refresh()
             router.push(`/${params.storeId}/banners`) // setelah dihapus, redirect ke halaman utama; push untuk navigasi ke halaman lain
             toast.success("Berhasil menghapus banner")
-        } catch (error) {
+        } catch {
             toast.error("Gagal menghapus toko, cek kembali data dan koneksi anda")
 
         } finally {
