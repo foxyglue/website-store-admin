@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  banners Banner[] @relation("StoreToBanner")
+  categories Category[] @relation("StoreToCategory")
+  products Product[] @relation("StoreToProduct")
+}
+
+model Banner {
+  id        String @id @default(uuid())
+  storeId   String
+  label     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  categories Category[]
+
+  store     Store   @relation("StoreToBanner", fields: [storeId], references: [id])
+  @@index([storeId]) 
+}
+
+model Category {
+  id    String @id @default(uuid())
+  storeId String
+  bannerId String
+  name String
+  createdAt DateTime @default(now())
+
+  store Store @relation("StoreToCategory",fields: [storeId], references: [id])
+  banner Banner @relation(fields: [bannerId], references: [id])
+  products Product[] @relation("CategoryToProduct")
+
+  @@index([storeId])
+  @@index([bannerId])
+}
+
+model Product {
+  id String @id @default(uuid())
+  storeId String
+  categoryId String
+  name String
+  price Decimal
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+  images Image[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store @relation("StoreToProduct",fields: [storeId], references: [id])
+  category Category @relation("CategoryToProduct",fields: [categoryId], references: [id])
+
+  @@index([storeId])
+  @@index([categoryId])
+}
+
+model Image {
+  id String @unique @default(uuid())
+  productId String
+  url String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
