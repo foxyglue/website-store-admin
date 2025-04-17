@@ -1,7 +1,21 @@
+// {
+//   "extends": ["next/core-web-vitals", "next/typescript"],
+//   "ignorePatterns": ["lib/generated/**","node_modules/**"]
+
+// }
+
+
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": ["next/core‑web‑vitals", "next/typescript"],
   "ignorePatterns": [
-    "lib/generated/",
-    "node_modules/"
-  ]
+    "lib/generated/**",   // ← ignore every file under lib/generated
+    "node_modules/**"
+  ],
+  "rules": {
+    // you can also tweak your unused‑vars rule here:
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ]
+  }
 }
